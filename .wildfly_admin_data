@@ -1,0 +1,7 @@
+WildFly 8 administrator added.  Please make note of these credentials:
+
+   Username: adminjM7f33Z
+   Password: mmRkyH3Avxcp
+   
+   run 'rhc port-forward myrestapp to access the web admin area on port 9990.
+
