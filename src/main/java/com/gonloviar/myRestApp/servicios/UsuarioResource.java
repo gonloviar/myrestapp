@@ -24,55 +24,36 @@ public class UsuarioResource {
     
     private AtomicInteger idCounter = new AtomicInteger();
 
-    public UsuarioResource() {
-        System.out.println("Creando los usuarios");
-        ingresarUsuariosPredefinidos();
+    public UsuarioResource() {        
+//        usuarios de prueba
+        System.out.println("Creando los usuarios");        
+        addUsuarioPredefinido("Alejandro", "Gonzalez");
+        addUsuarioPredefinido("Johanna", "Monroy");
     }
     
 
 //    probar lo del asyncronous, haciendo un "stop" y haciendo otra peticion
-//    @GET
-//    @Path("{id}")
-//    @Produces("text/html")
-//    public String getUsuario(@PathParam("id") int id){
-//        Usuario user = usuarioDB.get(id);
-//        if(user == null){
-//            System.out.println("--------paila mijo, no hay ese usuario-------");
-//            throw new WebApplicationException(Response.Status.NO_CONTENT);
-//        }
-//        
-//        return
-//                user.getId() + "__" +user.getNombre()+ "__"+user.getApellido();
-//    }
-    
     @GET
     @Path("{id}")
     @Produces("text/html")
     public String getUsuario(@PathParam("id") int id){
+        Usuario user = usuarioDB.get(id);        
+        if(user == null){
+            System.err.println("--------Paila mijo, no hay ese usuario------");
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
         
-        System.out.println("ESTO POR DONDE SALE? que mierda ");
-       return
-               "<h3> funcion&aacute; pues hijueputa!! </h3>" +
-               "en la url he puesto:&nbsp; "+id;
+        return
+                user.getId() + "__" +user.getNombre()+ "__"+user.getApellido();
     }
 
-
-    private void ingresarUsuariosPredefinidos() {  
-        //user 1
-        Usuario user1 = new Usuario();
-        user1.setNombre("alejo");
-        user1.setApellido("gonzalez");
-        user1.setId(idCounter.incrementAndGet());
-        usuarioDB.put(user1.getId(), user1);
-        System.out.println("Usuario 1 creado");
-        
-        //user 2
-        Usuario user2 = new Usuario();
-        user1.setNombre("johanna");
-        user1.setApellido("monroy");
-        user1.setId(idCounter.incrementAndGet());
-        usuarioDB.put(user1.getId(), user1);
-        System.out.println("Usuario 2 creado");
+    private void addUsuarioPredefinido(String nombre, String apellido) {
+        Usuario user = new Usuario();
+        user.setNombre(nombre);
+        user.setApellido(apellido);
+        user.setId(idCounter.incrementAndGet());
+        usuarioDB.put(user.getId(), user);
+        System.err.println("Usuario " + user.getId() + " creado.");
     }
     
     
