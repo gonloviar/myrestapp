@@ -15,7 +15,6 @@ import javax.ws.rs.core.Application;
  * @author yotas
  */
 
-// funciona sin este annotation?
 @ApplicationPath("/servicios")
 public class MyRestApplication extends Application{
     
